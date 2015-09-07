@@ -4,13 +4,14 @@
       <!-- Navigation -->
       <nav>
     		<button onclick="incrementResults(-1)">Previous Result</button>
-    		<select id="selector" onchange="changeResults(this.value)" style = "width: 60%">
-    			<option value="Chart" selected="selected">Chart</option>
+    		<select name="selector" ng-model="selected" style = "width: 60%">
+    			<option value="Chart">Chart</option>
+          <option ng-repeat="result in results" value="{{result.timestamp}}">{{result.timestamp}}</option>
     		</select>
     		<button onclick="incrementResults(1)">Next Result</button>
     	</nav>
       <!-- Disclaimer -->
-      <div id = "disclaimer">
+      <div id = "disclaimer" class = "testcase">
     		<h2><span style="color:red;">Disclaimer:</span></h2>
     		This autograder is a preliminary assessment of your program's correctness.
         Your grade may change UP OR DOWN based on the CORRECTNESS OF YOUR PROGRAM.
@@ -30,12 +31,21 @@
     		<br/><br/>
     		<h4>- CS 241 Staff</h4>
     	</div>
+      <br/>
       <!-- Results -->
+      <h2>Results</h2>
       <section id = "results">
-    		<div id = "carousel">
-    			<h2>Results</h2>
-          <div></div>
-    		</div>
+        <div ng-repeat = "result in results | filter:selected">
+          <h3 class="small-6 medium-6 large-6 columns" style = "text-align: left;">Revision: {{result.revision}}</h3>
+          <h3 class="small-6 medium-6 large-6 columns" style = "text-align: right;">Timestamp: {{result.timestamp}}</h3>
+          <br/><br/>
+          <div ng-repeat = "testcase in result.testcases" class="testcase">
+        		<h4 class="small-6 medium-6 large-6 columns" style = "text-align: left;">TestCase: {{testcase.name}}</h4>
+        		<h4 class="small-6 medium-6 large-6 columns" style = "text-align: right;">Score: {{testcase.ptsEarned}}/{{testcase.ptsPossible}}</h4>
+            <h5>Output Log</h5>
+          	<pre class = "terminal">{{testcase.log}}</pre>
+        	</div>
+        </div>
     	</section>
     </div>
 </div>
