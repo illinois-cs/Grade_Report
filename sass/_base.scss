@@ -1,14 +1,37 @@
-@import url('http://fonts.googleapis.com/css?family=Bree+Serif|Merriweather');
-@import url('http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css');
-
-
-h1 {
-  font-size: 2.2rem;
-  color: lighten($orange, 25);
+code {
+	background-color: black;
+	color: white;
+	font-family: monospace;
+}
+.two_column {
+	-webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+}
+.result {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 60%;
 }
 
-.test {
-  font-size: 1.2rem;
-  color: $blue;
+.testcase {
+	padding-top: 2.5%;
+	padding-bottom: 2.5%;
+	border: 1px solid black;
+}
+.pass {
+	color: green;
 }
 
+.fail {
+	color: red;
+}
+.hidden {
+	display: none;
+}
+
+.visible {
+	display: visible;
+	-webkit-animation: fadein 2s; /* Chrome, Safari, Opera */
+}

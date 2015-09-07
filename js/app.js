@@ -1,10 +1,8 @@
-// var demoApp = angular.module('demoApp', ['demoControllers']);
+var gradeReportApp = angular.module('gradeReportApp', ['ngRoute', 'gradeReportControllers']);
 
-var demoApp = angular.module('demoApp', ['ngRoute', 'demoControllers', 'demoServices']);
-
-demoApp.config(['$routeProvider', function($routeProvider) {
+gradeReportApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-    when('/firstview', {
+  when('/firstview', {
     templateUrl: 'partials/firstview.html',
     controller: 'FirstController'
   }).
@@ -20,7 +18,11 @@ demoApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/llamalist.html',
     controller: 'LlamaListController'
   }).
+  when('/main', {
+    templateUrl: 'partials/main.html',
+    controller: 'MainController'
+  }).
   otherwise({
-    redirectTo: '/settings'
+    redirectTo: '/main'
   });
 }]);
