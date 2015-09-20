@@ -26,13 +26,13 @@
 
 	<body>
 		<div ng-controller='MainController'>
-			{{results}}
+			<!-- {{results}} -->
 			<br/>
 			<div class="container-fluid">
 				<div class="row">
 				  <div class="col-md-8" style="float: none; margin: 0 auto;">
 
-						<select name="selector" ng-model="selected">
+						<select name="selector" ng-model="selected" style = "width:100%;">
 							<!-- <option value="Chart">Chart</option> -->
 							<option ng-repeat="result in results" value="{{result.timestamp}}">{{result.timestamp}}</option>
 			     	</select>
@@ -76,35 +76,31 @@
 							</div>
 						</div>
 
-						<div class="collapse-card">
-							<div class="collapse-card__heading" style ="background-color: #03a9f4">
-								<div class="collapse-card__title">
-									<i class="fa fa-question-circle fa-2x fa-fw"></i>
-								 	<span style="color:white">Testcase: What the Fuck</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green">(10/10)</span>
+
+
+						<div ng-init="paperCollapsify()" ng-repeat = "result in results | filter:selected" style = "margin-top:2.5%">
+							<!-- {{result}} -->
+							<h3 style = "display: inline-block;">Revision: {{result.revision}}</h3>
+          		<h3 style = "display: inline-block; float:right;">Timestamp: {{result.timestamp}}</h3>
+							<div ng-repeat = "testcase in result.testcases">
+								<div class="collapse-card">
+									<div class="collapse-card__heading" style ="background-color: #03a9f4">
+										<div class="collapse-card__title">
+											<i class="fa fa-question-circle fa-2x fa-fw"></i>
+										 	<h4><span style="color:white">Testcase: <code>{{testcase.name}}</code></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>({{testcase.ptsEarned}}/{{testcase.ptsPossible}})</span></h4>
+										</div>
+									</div>
+									<div class="collapse-card__body">
+										<h5>Description: {{testcase.description}}</h5>
+										<pre style="background-color:black;"><code style = "color:white; font-family:monospace;">{{testcase.log}}</code></pre>
+									</div>
 								</div>
 							</div>
-							<div class="collapse-card__body">
-								<pre>
-									<code>
-10.0.2.2 - - [20/Sep/2015 08:24:27] "GET /gradeReport.js HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:24:29] "GET /results.json HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:24:30] code 404, message File not found<br/>
-10.0.2.2 - - [20/Sep/2015 08:24:30] "GET /paper-collapse.min.css.map HTTP/1.1" 404 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:24:55] "GET / HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:24:56] "GET /style.css HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:24:56] "GET /gradeReport.js HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:24:56] "GET /results.json HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:26:10] "GET / HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:26:10] "GET /style.css HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:26:10] "GET /gradeReport.js HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:26:11] "GET /results.json HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:26:48] "GET / HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:26:49] "GET /style.css HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:26:49] "GET /gradeReport.js HTTP/1.1" 200 -<br/>
-10.0.2.2 - - [20/Sep/2015 08:26:50] "GET /results.json HTTP/1.1" 200 -<br/>
-									</code>
-								</pre>
-							</div>
+		        </div>
+						<div>
+							<!-- Horrible Hack to call on paper collapse once all the testcases are loaded :( -->
+							<!-- Please Fix :) -->
+							{{paperCollapsify()}}
 						</div>
 						<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
@@ -121,19 +117,11 @@
 
 	  Made with love by bbo - ©2015 Alexander Rühle
 	  MIT License http://opensource.org/licenses/MIT
-	*/.collapse-card{background-color:#fff;border-bottom:1px solid #eee;color:#777;-webkit-transition:0.4s;-moz-transition:0.4s;-o-transition:0.4s;transition:0.4s}.collapse-card *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.collapse-card.active{-moz-box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);-webkit-box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);z-index:200;margin:1rem -1rem}.collapse-card.active .collapse-card__heading:hover::after{content:"\f066"}.collapse-card .collapse-card__heading:hover::after{content:"\f065"}.collapse-card__heading{cursor:pointer;padding:1rem;position:relative}.collapse-card__heading:before,.collapse-card__heading:after{content:" ";display:table}.collapse-card__heading:after{clear:both}.collapse-card__heading i{float:left}.collapse-card__heading::after{color:#404040;font-family:'FontAwesome';font-size:1rem;line-height:2rem;padding-left:.4rem;position:absolute;right:1rem;top:1rem}.collapse-card__title{font-size:1rem;line-height:2rem;margin:0 2rem 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.collapse-card__body{padding:1rem;display:none}
-	/*# sourceMappingURL=paper-collapse.min.css.map */
+		*/.
+		collapse-card{background-color:#fff;border-bottom:1px solid #eee;color:#777;-webkit-transition:0.4s;-moz-transition:0.4s;-o-transition:0.4s;transition:0.4s}.collapse-card *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.collapse-card.active{-moz-box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);-webkit-box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);z-index:200;margin:1rem -1rem}.collapse-card.active .collapse-card__heading:hover::after{content:"\f066"}.collapse-card .collapse-card__heading:hover::after{content:"\f065"}.collapse-card__heading{cursor:pointer;padding:1rem;position:relative}.collapse-card__heading:before,.collapse-card__heading:after{content:" ";display:table}.collapse-card__heading:after{clear:both}.collapse-card__heading i{float:left}.collapse-card__heading::after{color:#404040;font-family:'FontAwesome';font-size:1rem;line-height:2rem;padding-left:.4rem;position:absolute;right:1rem;top:1rem}.collapse-card__title{font-size:1rem;line-height:2rem;margin:0 2rem 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.collapse-card__body{padding:1rem;display:none}
+		/*# sourceMappingURL=paper-collapse.min.css.map */
 	</style>
 	<script>
-		/*!
-		Paper Collapse v0.4.0
 
-		Collapsible paper cards.
-
-		Made with love by bbo - ©2015 Alexander Rühle
-		MIT License http://opensource.org/licenses/MIT
-		*/
-		(function(){!function(e){"use strict";e.fn.paperCollapse=function(o){var a;return a=e.extend({},e.fn.paperCollapse.defaults,o),e(this).find(".collapse-card__heading").add(a.closeHandler).click(function(){e(this).closest(".collapse-card").hasClass("active")?(a.onHide.call(this),e(this).closest(".collapse-card").removeClass("active"),e(this).closest(".collapse-card").find(".collapse-card__body").slideUp(a.animationDuration,a.onHideComplete)):(a.onShow.call(this),e(this).closest(".collapse-card").addClass("active"),e(this).closest(".collapse-card").find(".collapse-card__body").slideDown(a.animationDuration,a.onShowComplete))}),this},e.fn.paperCollapse.defaults={animationDuration:400,easing:"swing",closeHandler:".collapse-card__close_handler",onShow:function(){},onHide:function(){},onShowComplete:function(){},onHideComplete:function(){}}}(jQuery)}).call(this);
-		$('.collapse-card').paperCollapse();
 	</script>
 </html>
