@@ -78,16 +78,20 @@
 
 
 
-						<div ng-init="paperCollapsify()" ng-repeat = "result in results | filter:selected" style = "margin-top:2.5%">
+						<div ng-repeat = "result in results | filter:selected" style = "margin-top:2.5%">
 							<!-- {{result}} -->
 							<h3 style = "display: inline-block;">Revision: {{result.revision}}</h3>
           		<h3 style = "display: inline-block; float:right;">Timestamp: {{result.timestamp}}</h3>
 							<div ng-repeat = "testcase in result.testcases">
 								<div class="collapse-card">
-									<div class="collapse-card__heading" style ="background-color: #03a9f4">
+									<div class="collapse-card__heading" style ="background-color: #E1E9F1">
 										<div class="collapse-card__title">
 											<i class="fa fa-question-circle fa-2x fa-fw"></i>
-										 	<h4><span style="color:white">Testcase: <code>{{testcase.name}}</code></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>({{testcase.ptsEarned}}/{{testcase.ptsPossible}})</span></h4>
+										 	<h4>
+												<span style="color:black">Testcase: <code>{{testcase.name}}</code></span>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<span ng-style = "testcase.ptsEarned == testcase.ptsPossible ? { 'color':'green' } : { 'color': 'red' }">({{testcase.ptsEarned}}/{{testcase.ptsPossible}})</span>
+											</h4>
 										</div>
 									</div>
 									<div class="collapse-card__body">
@@ -103,7 +107,6 @@
 							{{paperCollapsify()}}
 						</div>
 						<br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
 					</div>
 				</div>
 			</div>
