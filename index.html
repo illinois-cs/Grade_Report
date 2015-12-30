@@ -4,7 +4,6 @@
 	<head>
 		<meta charset="utf-8">
 		<title>GRADE REPORT</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<!-- Angular -->
@@ -22,79 +21,106 @@
 
 	<body>
 		<div ng-controller='MainController'>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-8" style="float: none; margin: 0 auto;">
-						<h1>CS 241 Grade Report</h1>
-						<select name="selector" ng-model="selected" style = "width:100%;" ng-change="update()">
-							<option ng-repeat="result in results" value="{{result.timestamp}}" >{{result.timestamp}}</option>
-			     		</select>
+			<!-- Uses a header that scrolls with the text, rather than staying
+			  locked at the top -->
+			<div class="mdl-layout mdl-js-layout">
+			  <header class="mdl-layout__header mdl-layout__header--fixed-header">
+				<div class="mdl-layout__header-row">
+				  <!-- Title -->
+				  <span class="mdl-layout-title">CS 241 Grade Report</span>
+				  <!-- Add spacer, to align navigation to the right -->
+				  <div class="mdl-layout-spacer"></div>
+				  <!-- Navigation -->
+				  <nav class="mdl-navigation">
+					<a ng-repeat="result in results" class="mdl-navigation__link" href ="" ng-click="updateSelected(result.timestamp)">{{result.timestamp}}</a>
+				  </nav>
+				</div>
+			  </header>
+			  <div class="mdl-layout__drawer">
+				<span class="mdl-layout-title">Timestamp</span>
+				<nav class="mdl-navigation">
+				  <a ng-repeat="result in results" class="mdl-navigation__link" href ="" ng-click="updateSelected(result.timestamp); closeDrawer()">{{result.timestamp}}</a>
+				</nav>
+				<!-- <select name="selector" ng-model="selected">
+					<option ng-repeat="result in results" value="{{result.timestamp}}" >{{result.timestamp}}</option>
+				</select> -->
+			  </div>
+			  <main class="mdl-layout__content">
+				<div class="page-content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-8" style="float: none; margin: 0 auto;">
+								<!-- Your content goes here -->
 
-						<div id = "disclaimer" class="mdl-card mdl-shadow--2dp large-card" style = "width:100%; margin-top: 2%;">
-							<div class="mdl-card__title" style = "background-color: #03a9f4">
-								<h2 class="mdl-card__title-text" style = "color: white">Disclaimer</h2>
-							</div>
-							<div class="mdl-card__supporting-text" style="text-align:left">
-								<p>
-									This autograder is a preliminary assessment of your program's correctness.
-									Your grade may change UP OR DOWN based on the CORRECTNESS OF YOUR PROGRAM.
-									We make every effort to ensure that our autograder is 'smart' enough to not count off for simple things like grammar but, in doing so, we may inadvertently allow for incorrect code to be counted as correct.
-									If we have to change our script to better reflect the CORRECTNESS OF YOUR PROGRAM, we will run the script on EVERY TESTCASE and update EVERY STUDENT'S AUTOGRADER OUTPUT to ensure fairness to all students.
-									Thanks for understanding!
-								</p>
-							</div>
-						</div>
 
-						<div id = "integrity" class="mdl-card mdl-shadow--2dp large-card" style = "width:100%; margin-top: 2%;">
-							<div class="mdl-card__title" style = "background-color: #03a9f4">
-								<h2 class="mdl-card__title-text" style = "color: white">Academic Integrity</h2>
-							</div>
-							<div class="mdl-card__supporting-text" style="text-align:left">
-								<p>
-									Cheating is taken very seriously in CS 241 and all cases of cheating will be brought to the University, your department, and your college.
-									You should understand how <a href="https://wiki.cites.illinois.edu/wiki/display/undergradProg/Honor+Code">academic integrity</a> applies to Computer Science courses.
-								</p>
-								<p>
-									If you are caught cheating on an assignment and it was your <strong>first</strong> offense then you will lose all points for the assignment <strong>and</strong> your final course grade will be lowered by one whole letter grade.<br>
-									If you are caught cheating on an assignment and it was your <strong>second</strong> offense then you will automatically fail the course.<br>
-									<strong>Third</strong> offenses and onward do not really matter since you have already failed the course.<br><br>
-									Rule of Thumb - If at any point you submit an assignment that does not reflect your understanding of the material, then you have probably cheated.
-								</p>
-								<p>
-									Additionally, you may not publish your solutions or leave them in 'plain view' thereby leaving your programs open to copying, which constitutes cheating.
-									If your code (or a variation of it) is found publicy accesible, then you will receive a letter grade reduction for each assignment.
-									For example, if we find your code on GitHub for one MP then you will receive a letter grade reduction. 2 letter grades for 2 assignments and so on.
-									If you are confused on what it means to be 'publicly accessible', then do not put your code anywhere besides https://subversion.ews.illinois.edu and take measures to ensure that nobody can copy your code, so that you are not charged with a violation.
-								</p>
-							</div>
-						</div>
+								<div id = "disclaimer" class="mdl-card mdl-shadow--2dp large-card" style = "width:100%; margin-top: 2%;">
+									<div class="mdl-card__title" style = "background-color: #03a9f4">
+										<h2 class="mdl-card__title-text" style = "color: white">Disclaimer</h2>
+									</div>
+									<div class="mdl-card__supporting-text">
+										<p>
+											This autograde report is a preliminary assessment of your program's correctness.
+											Your grade may change UP OR DOWN based on the CORRECTNESS OF YOUR PROGRAM.
+											We make every effort to ensure that our autograder is 'smart' enough to not count off for simple things like grammar but, in doing so, we may inadvertently allow for incorrect code to be counted as correct.
+											If we have to change our script to better reflect the CORRECTNESS OF YOUR PROGRAM, we will run the script on EVERY TESTCASE and update EVERY STUDENT'S AUTOGRADER OUTPUT to ensure fairness to all students.
+											Thanks for understanding!
+										</p>
+									</div>
+								</div>
 
-						<div ng-repeat = "result in results | filter:selected" style = "margin-top:5%; margin-bottom:5%">
-							<div>
-								<h3 style = "display: inline-block;">Revision: {{result.revision}}</h3>
-	          					<h3 style = "display: inline-block; float:right;">Timestamp: {{result.timestamp}}</h3>
-								<div ng-repeat = "testcase in result.testcases">
-									<div class="collapse-card" ng-attr-id={{$index}}>
-										<div class="collapse-card__heading" style ="background-color: #E1E9F1" ng-click="update($index)">
-											<div class="collapse-card__title">
-												<i class="fa fa-question-circle fa-2x fa-fw"></i>
-											 	<h4>
-													<span style="color:black">Testcase: <code>{{testcase.name}}</code></span>
-													&nbsp;&nbsp;&nbsp;&nbsp;
-													<span ng-style = "testcase.ptsEarned == testcase.ptsPossible ? { 'color':'green' } : { 'color': 'red' }">({{testcase.ptsEarned}}/{{testcase.ptsPossible}})</span>
-												</h4>
+								<div id = "integrity" class="mdl-card mdl-shadow--2dp large-card" style = "width:100%; margin-top: 2%;">
+									<div class="mdl-card__title" style = "background-color: #03a9f4">
+										<h2 class="mdl-card__title-text" style = "color: white">Academic Integrity</h2>
+									</div>
+									<div class="mdl-card__supporting-text">
+										<p>
+											Cheating is taken very seriously in CS 241 and all cases of cheating will be brought to the University, your department, and your college.
+											You should understand how <a href="https://wiki.cites.illinois.edu/wiki/display/undergradProg/Honor+Code">academic integrity</a> applies to Computer Science courses.
+										</p>
+										<ul>
+											<li>If you are caught cheating on an assignment and it was your <strong>first</strong> offense then you will lose all points for the assignment <strong>and</strong> your final course grade will be lowered by one whole letter grade.</li>
+											<li>If you are caught cheating on an assignment and it was your <strong>second</strong> offense then you will automatically fail the course.</li>
+											<li><strong>Third</strong> offenses and onward do not really matter since you have already failed the course.</li>
+										</ul>
+										<p><span style = "color:green">Rule of Thumb</span> - If at any point you submit an assignment that does not reflect your understanding of the material, then you have probably cheated.</p>
+										<p>
+											Additionally, you may not publish your solutions or leave them in 'plain view' thereby leaving your programs open to copying, which constitutes cheating.
+											If your code (or a variation of it) is found publicy accesible, then you will receive a letter grade reduction for each assignment.
+											For example, if we find your code on GitHub for one MP then you will receive a letter grade reduction. 2 letter grades for 2 assignments and so on.
+											If you are confused on what it means to be 'publicly accessible', then do not put your code anywhere besides https://subversion.ews.illinois.edu and take measures to ensure that nobody can copy your code, so that you are not charged with a violation.
+										</p>
+									</div>
+								</div>
+
+								<div ng-repeat = "result in results | filter:selected" class="mdl-card mdl-shadow--2dp large-card" style = "margin-top:5%; margin-bottom:5%; width:100%;">
+									<div style="padding: 2%;">
+										<h3 style = "display: inline-block;">Revision: {{result.revision}}</h3>
+										<h3 style = "display: inline-block; float:right;">Timestamp: {{result.timestamp}}</h3>
+										<div ng-repeat = "testcase in result.testcases">
+											<div class="collapse-card" ng-attr-id={{$index}}>
+												<div class="collapse-card__heading" style ="background-color: #E1E9F1" ng-click="update($index)">
+													<div class="collapse-card__title">
+														<i class="fa fa-question-circle fa-2x fa-fw"></i>
+														<h4>
+															<span style="color:black; padding-right:2%">Testcase: <code>{{testcase.name}}</code></span>
+															<span ng-style = "testcase.ptsEarned == testcase.ptsPossible ? { 'color':'green' } : { 'color': 'red' }">({{testcase.ptsEarned}}/{{testcase.ptsPossible}})</span>
+														</h4>
+													</div>
+												</div>
+												<div class="collapse-card__body">
+													<h5>Description: {{testcase.description}}</h5>
+													<pre style="background-color:black;"><code style = "color:white; font-family:monospace;">{{testcase.log}}</code></pre>
+												</div>
 											</div>
-										</div>
-										<div class="collapse-card__body">
-											<h5>Description: {{testcase.description}}</h5>
-											<pre style="background-color:black;"><code style = "color:white; font-family:monospace;">{{testcase.log}}</code></pre>
 										</div>
 									</div>
 								</div>
+
 							</div>
-		        		</div>
+						</div>
 					</div>
 				</div>
+			  </main>
 			</div>
 		</div>
 	</body>
@@ -166,7 +192,14 @@
 		      $scope.selected = data[data.length-1].timestamp;
 		      $scope.update = function(index){
 		          $("#"+index).toggleClass("active");
-		      }
+		      };
+			  $scope.updateSelected = function(input){
+		          $scope.selected = input;
+		      };
+			  $scope.closeDrawer = function(){
+				  console.log("fiuck");
+		          $(".mdl-layout__drawer").toggleClass("is-visible");
+		      };
 		  });
 		}]);
 	</script>
