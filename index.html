@@ -9,7 +9,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<!-- Angular -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
-        <script src="gradeReport.js"></script>
 		<!-- Google Material Design -->
 		<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
 		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
@@ -18,9 +17,6 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<!-- Paper Collapse -->
-		<!-- <link rel="stylesheet" href="https://raw.githubusercontent.com/alexander-ruehle/paper-collapse/master/paper-collapse.min.css"> -->
-		<!-- <script type="application/javascript" src="https://raw.githubusercontent.com/alexander-ruehle/paper-collapse/master/paper-collapse.min.js"></script> -->
 
 	</head>
 
@@ -159,4 +155,19 @@
 		  opacity: 1;
 		}
 	</style>
+	<script>
+		var gradeReportApp = angular.module('gradeReportApp', ['gradeReportControllers']);
+		var gradeReportControllers = angular.module('gradeReportControllers', []);
+
+		gradeReportControllers.controller('MainController', ['$scope', '$http', function($scope, $http) {
+
+		  $http.get("results.json").success(function(data) {
+		      $scope.results = data;
+		      $scope.selected = data[data.length-1].timestamp;
+		      $scope.update = function(index){
+		          $("#"+index).toggleClass("active");
+		      }
+		  });
+		}]);
+	</script>
 </html>
