@@ -4,12 +4,12 @@
 	<head>
 		<meta charset="utf-8">
 		<title>GRADE REPORT</title>
-	  <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<!-- Angular -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
-	  <script src="gradeReport.js"></script>
+        <script src="gradeReport.js"></script>
 		<!-- Google Material Design -->
 		<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
 		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
@@ -19,23 +19,20 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<!-- Paper Collapse -->
-		<link rel="stylesheet" href="https://raw.githubusercontent.com/alexander-ruehle/paper-collapse/master/paper-collapse.min.css">
-		<!-- <script language="javascript" type="text/plain" src="https://raw.githubusercontent.com/alexander-ruehle/paper-collapse/master/paper-collapse.min.js"></script> -->
+		<!-- <link rel="stylesheet" href="https://raw.githubusercontent.com/alexander-ruehle/paper-collapse/master/paper-collapse.min.css"> -->
+		<!-- <script type="application/javascript" src="https://raw.githubusercontent.com/alexander-ruehle/paper-collapse/master/paper-collapse.min.js"></script> -->
 
 	</head>
 
 	<body>
 		<div ng-controller='MainController'>
-			<!-- {{results}} -->
-			<br/>
 			<div class="container-fluid">
 				<div class="row">
-				  <div class="col-md-8" style="float: none; margin: 0 auto;">
-
-						<select name="selector" ng-model="selected" style = "width:100%;">
-							<!-- <option value="Chart">Chart</option> -->
-							<option ng-repeat="result in results" value="{{result.timestamp}}">{{result.timestamp}}</option>
-			     	</select>
+					<div class="col-md-8" style="float: none; margin: 0 auto;">
+						<h1>CS 241 Grade Report</h1>
+						<select name="selector" ng-model="selected" style = "width:100%;" ng-change="update()">
+							<option ng-repeat="result in results" value="{{result.timestamp}}" >{{result.timestamp}}</option>
+			     		</select>
 
 						<div id = "disclaimer" class="mdl-card mdl-shadow--2dp large-card" style = "width:100%; margin-top: 2%;">
 							<div class="mdl-card__title" style = "background-color: #03a9f4">
@@ -76,37 +73,30 @@
 							</div>
 						</div>
 
-
-
-						<div ng-repeat = "result in results | filter:selected" style = "margin-top:2.5%">
-							<!-- {{result}} -->
-							<h3 style = "display: inline-block;">Revision: {{result.revision}}</h3>
-          		<h3 style = "display: inline-block; float:right;">Timestamp: {{result.timestamp}}</h3>
-							<div ng-repeat = "testcase in result.testcases">
-								<div class="collapse-card">
-									<div class="collapse-card__heading" style ="background-color: #E1E9F1">
-										<div class="collapse-card__title">
-											<i class="fa fa-question-circle fa-2x fa-fw"></i>
-										 	<h4>
-												<span style="color:black">Testcase: <code>{{testcase.name}}</code></span>
-												&nbsp;&nbsp;&nbsp;&nbsp;
-												<span ng-style = "testcase.ptsEarned == testcase.ptsPossible ? { 'color':'green' } : { 'color': 'red' }">({{testcase.ptsEarned}}/{{testcase.ptsPossible}})</span>
-											</h4>
+						<div ng-repeat = "result in results | filter:selected" style = "margin-top:5%; margin-bottom:5%">
+							<div>
+								<h3 style = "display: inline-block;">Revision: {{result.revision}}</h3>
+	          					<h3 style = "display: inline-block; float:right;">Timestamp: {{result.timestamp}}</h3>
+								<div ng-repeat = "testcase in result.testcases">
+									<div class="collapse-card" ng-attr-id={{$index}}>
+										<div class="collapse-card__heading" style ="background-color: #E1E9F1" ng-click="update($index)">
+											<div class="collapse-card__title">
+												<i class="fa fa-question-circle fa-2x fa-fw"></i>
+											 	<h4>
+													<span style="color:black">Testcase: <code>{{testcase.name}}</code></span>
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<span ng-style = "testcase.ptsEarned == testcase.ptsPossible ? { 'color':'green' } : { 'color': 'red' }">({{testcase.ptsEarned}}/{{testcase.ptsPossible}})</span>
+												</h4>
+											</div>
 										</div>
-									</div>
-									<div class="collapse-card__body">
-										<h5>Description: {{testcase.description}}</h5>
-										<pre style="background-color:black;"><code style = "color:white; font-family:monospace;">{{testcase.log}}</code></pre>
+										<div class="collapse-card__body">
+											<h5>Description: {{testcase.description}}</h5>
+											<pre style="background-color:black;"><code style = "color:white; font-family:monospace;">{{testcase.log}}</code></pre>
+										</div>
 									</div>
 								</div>
 							</div>
-		        </div>
-						<div>
-							<!-- Horrible Hack to call on paper collapse once all the testcases are loaded :( -->
-							<!-- Please Fix :) -->
-							{{paperCollapsify()}}
-						</div>
-						<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		        		</div>
 					</div>
 				</div>
 			</div>
@@ -114,17 +104,59 @@
 	</body>
 	<style>
 		/*!
-	  Paper Collapse v0.4.0
+		  Paper Collapse v0.4.0
+		  Collapsible paper cards.
+		  Made with love by bbo - ©2015 Alexander Rühle
+		  MIT License http://opensource.org/licenses/MIT
+		*/
+		/*.collapse-card{background-color:#fff;border-bottom:1px solid #eee;color:#777;-webkit-transition:0.4s;-moz-transition:0.4s;-o-transition:0.4s;transition:0.4s}.collapse-card *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.collapse-card.active{-moz-box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);-webkit-box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);z-index:200;margin:1rem -1rem}.collapse-card.active .collapse-card__heading:hover::after{content:"\f066"}.collapse-card .collapse-card__heading:hover::after{content:"\f065"}.collapse-card__heading{cursor:pointer;padding:1rem;position:relative}.collapse-card__heading:before,.collapse-card__heading:after{content:" ";display:table}.collapse-card__heading:after{clear:both}.collapse-card__heading i{float:left}.collapse-card__heading::after{color:#404040;font-family:'FontAwesome';font-size:1rem;line-height:2rem;padding-left:.4rem;position:absolute;right:1rem;top:1rem}.collapse-card__title{font-size:1rem;line-height:2rem;margin:0 2rem 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.collapse-card__body{padding:1rem;display:none}*/
+		.collapse-card {
+		  background-color: #fff;
+		  border: 1px solid #eee;
+		  color: #777;
+		  -webkit-transition: .4s;
+		  -moz-transition: .4s;
+		  -o-transition: .4s;
+		  transition: .4s;
+		}
 
-	  Collapsible paper cards.
+		.collapse-card__title {
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+		  white-space: nowrap;
+		}
 
-	  Made with love by bbo - ©2015 Alexander Rühle
-	  MIT License http://opensource.org/licenses/MIT
-		*/.
-		collapse-card{background-color:#fff;border-bottom:1px solid #eee;color:#777;-webkit-transition:0.4s;-moz-transition:0.4s;-o-transition:0.4s;transition:0.4s}.collapse-card *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.collapse-card.active{-moz-box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);-webkit-box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);box-shadow:0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.18824);z-index:200;margin:1rem -1rem}.collapse-card.active .collapse-card__heading:hover::after{content:"\f066"}.collapse-card .collapse-card__heading:hover::after{content:"\f065"}.collapse-card__heading{cursor:pointer;padding:1rem;position:relative}.collapse-card__heading:before,.collapse-card__heading:after{content:" ";display:table}.collapse-card__heading:after{clear:both}.collapse-card__heading i{float:left}.collapse-card__heading::after{color:#404040;font-family:'FontAwesome';font-size:1rem;line-height:2rem;padding-left:.4rem;position:absolute;right:1rem;top:1rem}.collapse-card__title{font-size:1rem;line-height:2rem;margin:0 2rem 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.collapse-card__body{padding:1rem;display:none}
-		/*# sourceMappingURL=paper-collapse.min.css.map */
+		.collapse-card__heading {
+		  font-size: 1em;
+		  line-height: 2em;
+		  cursor: pointer;
+		  padding: 1em;
+		  position: relative;
+		}
+
+		.collapse-card__heading i {
+		  float: left;
+		}
+
+		.collapse-card__body {
+		  overflow: hidden;
+		  transition: .4s;
+		  max-height: 0px;
+		  opacity: 0;
+		}
+
+		.collapse-card.active {
+		  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.18824);
+		  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.18824);
+		  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.18824);
+		  z-index: 200;
+		  margin: 1rem -1rem;
+		}
+
+		.collapse-card.active .collapse-card__body {
+		  max-height: 400px;
+		  padding: 1em;
+		  opacity: 1;
+		}
 	</style>
-	<script>
-
-	</script>
 </html>
