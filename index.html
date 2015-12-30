@@ -21,38 +21,32 @@
 
 	<body>
 		<div ng-controller='MainController'>
-			<!-- Uses a header that scrolls with the text, rather than staying
-			  locked at the top -->
-			<div class="mdl-layout mdl-js-layout">
-			  <header class="mdl-layout__header mdl-layout__header--fixed-header">
-				<div class="mdl-layout__header-row">
-				  <!-- Title -->
-				  <span class="mdl-layout-title">CS 241 Grade Report</span>
-				  <!-- Add spacer, to align navigation to the right -->
-				  <div class="mdl-layout-spacer"></div>
-				  <!-- Navigation -->
-				  <nav class="mdl-navigation">
-					<a ng-repeat="result in results" class="mdl-navigation__link" href ="" ng-click="updateSelected(result.timestamp)">{{result.timestamp}}</a>
-				  </nav>
-				</div>
-			  </header>
+			  <!-- Always shows a header, even in smaller screens. -->
+			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+			    <header class="mdl-layout__header">
+			      <div class="mdl-layout__header-row">
+			        <!-- Title -->
+			        <span class="mdl-layout-title">CS 241 Grade Report</span>
+			        <!-- Add spacer, to align navigation to the right -->
+			        <div class="mdl-layout-spacer"></div>
+			        <!-- Navigation. We hide it in small screens. -->
+			        <nav class="mdl-navigation mdl-layout--large-screen-only">
+			         <a ng-repeat="result in results" class="mdl-navigation__link" href ="" ng-click="updateSelected(result.timestamp);">{{result.timestamp}}</a>
+			        </nav>
+			      </div>
+			    </header>
 			  <div class="mdl-layout__drawer">
 				<span class="mdl-layout-title">Timestamp</span>
 				<nav class="mdl-navigation">
 				  <a ng-repeat="result in results" class="mdl-navigation__link" href ="" ng-click="updateSelected(result.timestamp); closeDrawer()">{{result.timestamp}}</a>
 				</nav>
-				<!-- <select name="selector" ng-model="selected">
-					<option ng-repeat="result in results" value="{{result.timestamp}}" >{{result.timestamp}}</option>
-				</select> -->
 			  </div>
 			  <main class="mdl-layout__content">
 				<div class="page-content">
+					<!-- Your content goes here -->
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-md-8" style="float: none; margin: 0 auto;">
-								<!-- Your content goes here -->
-
-
 								<div id = "disclaimer" class="mdl-card mdl-shadow--2dp large-card" style = "width:100%; margin-top: 2%;">
 									<div class="mdl-card__title" style = "background-color: #03a9f4">
 										<h2 class="mdl-card__title-text" style = "color: white">Disclaimer</h2>
