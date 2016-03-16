@@ -52,7 +52,7 @@
 										<h2 class="mdl-card__title-text" style = "color: white">Summary</h2>
 									</div>
 									<div class="mdl-card__supporting-text">
-										For your autograde submitted at [{{selected}}] you recieved a [{{pointsEarned}}/{{pointsPossible}}].
+										For your autograde submitted at [{{selected}}] you received a [{{pointsEarned}}/{{pointsPossible}}].
 									</div>
 								</div>
 
@@ -88,7 +88,7 @@
 										<p><span style = "color:green">Rule of Thumb</span> - If at any point you submit an assignment that does not reflect your understanding of the material, then you have probably cheated.</p>
 										<p>
 											Additionally, you may not publish your solutions or leave them in 'plain view' thereby leaving your programs open to copying, which constitutes cheating.
-											If your code (or a variation of it) is found publicy accesible, then you will receive a letter grade reduction for each assignment.
+											If your code (or a variation of it) is found publicly accessible, then you will receive a letter grade reduction for each assignment.
 											For example, if we find your code on GitHub for one MP then you will receive a letter grade reduction. 2 letter grades for 2 assignments and so on.
 											If you are confused on what it means to be 'publicly accessible', then do not put your code anywhere besides https://subversion.ews.illinois.edu and take measures to ensure that nobody can copy your code, so that you are not charged with a violation.
 										</p>
@@ -97,7 +97,7 @@
 
 								<div ng-repeat = "result in results | filter:selected" class="mdl-card mdl-shadow--2dp large-card" style = "margin-top:5%; margin-bottom:5%; width:100%;">
 									<div style="padding: 2%;">
-										<h3 style = "display: inline-block;">Revision: {{result.revision}}</h3>
+										<h3 style = "display: inline-block;">Revision: <a ng-href = "https://subversion.ews.illinois.edu/svn/sp16-cs241/?p={{result.revision}}">{{result.revision}}</a></h3>
 										<h3 style = "display: inline-block; float:right;">Timestamp: {{result.timestamp}}</h3>
 										<div ng-repeat = "testcase in result.testcases">
 											<div class="collapse-card" ng-attr-id={{$index}}>
