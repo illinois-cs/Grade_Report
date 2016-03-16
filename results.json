@@ -2,6 +2,7 @@
   {
     "timestamp":"now",
     "revision": 39147109,
+    "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
       {
         "name": "testcase1",
@@ -44,6 +45,7 @@
   {
     "timestamp":"past",
     "revision": 39147108,
+    "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c\n77fdc5590606e8e407e770b22a0040ee81862529  cracker2.c",
     "testcases": [
       {
         "name": "testcase1",
