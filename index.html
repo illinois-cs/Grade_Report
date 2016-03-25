@@ -97,8 +97,9 @@
 
 								<div ng-repeat = "result in results | filter:selected" class="mdl-card mdl-shadow--2dp large-card" style = "margin-top:5%; margin-bottom:5%; width:100%;">
 									<div style="padding: 2%;">
-										<h3 style = "display: inline-block;">Revision: <a ng-href = "https://subversion.ews.illinois.edu/svn/sp16-cs241/?p={{result.revision}}">{{result.revision}}</a></h3>
+										<h3 style = "display: inline-block;">Revision: <a ng-href = "./?p={{result.revision}}">{{result.revision}}</a></h3>
 										<h3 style = "display: inline-block; float:right;">Timestamp: {{result.timestamp}}</h3>
+										<br/>
 										<h4>SHA1 checksum(s):</h4>
 										<pre>{{result.checksum}}</pre>
 										<div ng-repeat = "testcase in result.testcases">
