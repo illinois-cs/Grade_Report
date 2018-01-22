@@ -1,16 +1,16 @@
-template = None
-script = None
-style = None
-with open('template.html', 'r') as myfile:
-    template=myfile.read()
-with open('script.js', 'r') as myfile:
-    script=myfile.read()
-with open('style.css', 'r') as myfile:
-    style=myfile.read()
+#!/usr/bin/env python3
+import jinja2
 
-html = template
-html = html.replace("[script]", "<script>\n{0}</script>".format(script))
-html = html.replace("[style]", "<style>\n{0}</style>".format(style))
+def main():
 
-with open('index.html', 'w') as myfile:
-    myfile.write(html)
+	templateLoader = jinja2.FileSystemLoader( searchpath="./")
+	templateEnv = jinja2.Environment( loader=templateLoader )
+	TEMPLATE_FILE = "index.jinja"
+	template = templateEnv.get_template( TEMPLATE_FILE )
+	html = template.render()
+
+	with open('index.html', 'w') as myfile:
+		myfile.write(html)
+
+if __name__ == '__main__':
+	main()
