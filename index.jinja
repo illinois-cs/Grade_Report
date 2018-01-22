@@ -6,6 +6,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <style> {% include "code-style.css" %} </style>
     <style> {% include "main.css" %} </style>
   </head>
@@ -23,8 +24,8 @@
             <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand navbar-link normal" href="/">CS 241: Grade Report</a>
-            <a class="navbar-brand navbar-link small" href="/">Grade Report</a>
+            <span class="navbar-brand navbar-link normal">CS 241: Grade Report</a>
+            <span class="navbar-brand navbar-link small">Grade Report</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
@@ -35,7 +36,26 @@
     </div>
     </nav>
 
+    <div id="error" class="hidden">
+      <div class="col-md-2 col-sm-1 col-xs-0"></div>
+    <div class="col-md-8 col-sm-10 col-xs-12">
+    <div id="content">
+      <div class="wrapper">
+      <div class="pad"><div class="card">
+      <div class="title"><h2 class="title-text">Please View online</h2></div>
+    </div>
 
+    <div class="container-fluid"><div class="row"><div class="content col-sm-11 .col-sm-offset-1">
+        <p>Please visit your subversion in order to view this report properly https://subversion.ews.illinois.edu/svn/</p>
+      </div></div></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+    <div id="main">
     <div class="col-md-2 col-sm-1 col-xs-0"></div>
     <div class="col-md-8 col-sm-10 col-xs-12">
     <div id="content">
@@ -76,15 +96,15 @@
       </div></div>
       </div>
 
-      <div class="wrapper">
+      <div class="wrapper" style="padding-bottom:40px">
       <div class="pad"><div class="card">
       <div class="title"><h2 class="title-text"> Test Cases </h2> </div>
       <div class="container-fluid"><div class="row"><div class="content col-sm-11 .col-sm-offset-1">
         <div class="row">
-          <div class="col-sm-6">
-            <h3 style="text-align:left">Revision: <span id="revision"><a href="/" class="fancy-link">54839</a> </span></h3>
+          <div class="col-sm-4">
+            <h3 style="text-align:left">Revision: <span id="revision"><a href="./?p=5" class="fancy-link">5</a> </span></h3>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-8">
           <h3 style="text-align:right">Timestamp: <span id="timestamp">1738</span> </h3>
         </div>
       </div>
@@ -92,18 +112,16 @@
         <h4 style="left:0">SHA1 checksum(s):</h4>
 
         <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code id="sha1">
-          asd321409udfsioja;dsf      lol
-          asd321409udfsioja;dsf      lol2
         </code></pre></div></div>
 
-        <div id="tests">
-          <div class="test-class">
-            <h4>Test Name: 20 / 20</h4>
-          </div>
+        <div id="tests" class="container-fluid">
         </div>
       </div></div></div>
       </div></div>
       </div>
     </div>
+  </div>
+
+    <script type="text/javascript">{% include "main.js" %}</script>
   </body>
 </html>

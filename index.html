@@ -6,6 +6,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <style> .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {
@@ -566,6 +567,42 @@ div.highlighter-rouge, figure.highlighter-rouge {
 
 h3 {
     display: inline;
+}
+
+#tests > div:nth-of-type(odd) {
+    background-color:#d0d4db;
+    border-radius:3px;
+}
+
+.hidden {
+
+}
+
+.show {
+    visibility: 
+}
+
+.test-fail {
+    color: red;
+}
+
+.test-success {
+    color: green;
+}
+.test-class {
+    cursor: pointer;
+}
+
+.test-drawer {
+    cursor: default;
+}
+
+.test-table-title {
+    text-decoration: underline;
+}
+
+.navbar-link {
+    cursor: pointer;
 } </style>
   </head>
 
@@ -582,8 +619,8 @@ h3 {
             <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand navbar-link normal" href="/">CS 241: Grade Report</a>
-            <a class="navbar-brand navbar-link small" href="/">Grade Report</a>
+            <span class="navbar-brand navbar-link normal">CS 241: Grade Report</a>
+            <span class="navbar-brand navbar-link small">Grade Report</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
@@ -594,7 +631,26 @@ h3 {
     </div>
     </nav>
 
+    <div id="error" class="hidden">
+      <div class="col-md-2 col-sm-1 col-xs-0"></div>
+    <div class="col-md-8 col-sm-10 col-xs-12">
+    <div id="content">
+      <div class="wrapper">
+      <div class="pad"><div class="card">
+      <div class="title"><h2 class="title-text">Please View online</h2></div>
+    </div>
 
+    <div class="container-fluid"><div class="row"><div class="content col-sm-11 .col-sm-offset-1">
+        <p>Please visit your subversion in order to view this report properly https://subversion.ews.illinois.edu/svn/</p>
+      </div></div></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+    <div id="main">
     <div class="col-md-2 col-sm-1 col-xs-0"></div>
     <div class="col-md-8 col-sm-10 col-xs-12">
     <div id="content">
@@ -635,15 +691,15 @@ h3 {
       </div></div>
       </div>
 
-      <div class="wrapper">
+      <div class="wrapper" style="padding-bottom:40px">
       <div class="pad"><div class="card">
       <div class="title"><h2 class="title-text"> Test Cases </h2> </div>
       <div class="container-fluid"><div class="row"><div class="content col-sm-11 .col-sm-offset-1">
         <div class="row">
-          <div class="col-sm-6">
-            <h3 style="text-align:left">Revision: <span id="revision"><a href="/" class="fancy-link">54839</a> </span></h3>
+          <div class="col-sm-4">
+            <h3 style="text-align:left">Revision: <span id="revision"><a href="./?p=5" class="fancy-link">5</a> </span></h3>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-8">
           <h3 style="text-align:right">Timestamp: <span id="timestamp">1738</span> </h3>
         </div>
       </div>
@@ -651,18 +707,143 @@ h3 {
         <h4 style="left:0">SHA1 checksum(s):</h4>
 
         <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code id="sha1">
-          asd321409udfsioja;dsf      lol
-          asd321409udfsioja;dsf      lol2
         </code></pre></div></div>
 
-        <div id="tests">
-          <div class="test-class">
-            <h4>Test Name: 20 / 20</h4>
-          </div>
+        <div id="tests" class="container-fluid">
         </div>
       </div></div></div>
       </div></div>
       </div>
     </div>
+  </div>
+
+    <script type="text/javascript">"use strict";
+
+$(document).ready(function (){
+
+	function populate_tests(tests) {
+		/**
+		tests=[
+	      {
+	        "name": str,
+	        "description": str,
+	        "ptsPossible": int,
+	        "ptsEarned": int,
+	        "memory": int,
+	        "time": int,
+	        "log": str,
+	       },
+	    ... */
+	    const test_class = $('#tests');
+	    test_class.empty();
+	    test_class.append("<div class='row'><div class='col-sm-6'> \
+	    	<h4 class='test-table-title'>Name</h4></div>\
+	    	<div class='col-sm-6'><h4 class='test-table-title'>Score</h4></div></div>");
+	    for (var i = 0; i < tests.length; ++i) {
+	    	const test = tests[i];
+	    	var cls = "test-fail";
+	    	if (test["ptsPossible"] === test["ptsEarned"]) {
+	    		cls = "test-success";
+	    	}
+	    	const score = "(" + test["ptsPossible"] + "/" + test["ptsEarned"] + ")"
+	    	var h4 = $('<h4></h4>');
+	    	h4.html(test["name"]);
+	    	const test_name = $("<div class='col-sm-6'></div>");
+	    	test_name.append(h4);
+
+	    	h4 = $('<h4></h4>');
+	    	h4.html(score);
+	    	const score_div = $("<div class='col-sm-6'></div>");
+	    	score_div.addClass(cls);
+	    	score_div.append(h4);
+
+	    	const wrapper = $("<div class='test-class'></div>");
+	    	wrapper.append(test_name);
+	    	wrapper.append(score_div);
+
+
+	    	const drawer = $("<div class='container-fluid'><div class='row'><div class='col-sm-12'>\
+	    		<div class='test-drawer'></div></div></div></div>")
+	    	drawer.addClass('hidden');
+
+	    	const description = $('<h4></h4>');
+	    	description.text('Description '+test['description']);
+
+	    	const output = $('<div class="highlighter-rouge"><div class="highlight">\
+	    		<pre class="highlight" style="white-space:pre-wrap; overflow-y: scroll; overflow-x:hidden; height: 300px;">\
+	    		<code style="color:white;font-family:monospace;">'+test['log']+'</code></pre></div></div>');
+	    	drawer.append(description);
+	    	drawer.append(output);
+
+	    	const row = $("<div class='row'></div>");
+
+			row.append(wrapper);
+	    	row.append(drawer);
+
+	    	wrapper.click(function() {
+	    		if (drawer.hasClass('hidden')) {
+	    			drawer.show('slide', {direction: 'down', easing: 'easeOutBounce'}, 200)
+	    		} else {
+	    			drawer.hide('slide', {direction: 'up', easing: 'easeOutBounce'}, 50)
+	    		}
+	    		drawer.toggleClass('hidden')
+	    	});
+
+	    	test_class.append(row);
+	    }
+	    $('.test-drawer').hide();
+	}
+
+	function update_page(ag_run) {
+		populate_tests(ag_run["testcases"]);
+		$("#timestamp").empty();
+		$("#timestamp").text(ag_run["timestamp"]);
+
+		var scored = 0;
+		var total = 0;
+		for(var i = 0; i < ag_run["testcases"].length; ++i) {
+			const test = ag_run["testcases"][i];
+			scored += test["ptsPossible"];
+			total += test["ptsEarned"];
+		}
+
+		$("#total_score").empty();
+		$("#total_score").text(""+scored);
+		$("#total_points").empty();
+		$("#total_points").text(""+total);
+		$('#sha1').empty()
+		$('#sha1').text(""+ag_run["checksum"])
+
+		$("#timestamp").empty();
+		$("#timestamp").text(ag_run["timestamp"]);
+
+	}
+
+	function add_nav_stamps(runs) {
+		for(var i = 0; i < runs.length; ++i) {
+			const link = $('<a class="navbar-link"></a>');
+			link.text(runs[i]["timestamp"]);
+			link.click(function(run) {
+				return function (event) {
+					event.preventDefault();
+					update_page(run);
+				}}(runs[i]));
+			const elem = $('<li></li>');
+			elem.append(link);
+
+			$('#nav-list').append(elem);
+		}
+	}
+
+	$.get( "./results.json", function(data) {
+		add_nav_stamps(data);
+		update_page(data[0]);
+	})
+	.fail(function() {
+		$('#error').removeClass('hidden');
+		$('#main').addClass('hidden');
+	});
+
+});</script>
   </body>
 </html>

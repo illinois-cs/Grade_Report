@@ -481,3 +481,39 @@ div.highlighter-rouge, figure.highlighter-rouge {
 h3 {
     display: inline;
 }
+
+#tests > div:nth-of-type(odd) {
+    background-color:#d0d4db;
+    border-radius:3px;
+}
+
+.hidden {
+
+}
+
+.show {
+    visibility: 
+}
+
+.test-fail {
+    color: red;
+}
+
+.test-success {
+    color: green;
+}
+.test-class {
+    cursor: pointer;
+}
+
+.test-drawer {
+    cursor: default;
+}
+
+.test-table-title {
+    text-decoration: underline;
+}
+
+.navbar-link {
+    cursor: pointer;
+}
