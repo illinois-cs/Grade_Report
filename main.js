@@ -88,15 +88,17 @@ $(document).ready(function (){
 			total += test["ptsEarned"];
 		}
 
-		$("#total_score").empty();
 		$("#total_score").text(""+scored);
-		$("#total_points").empty();
 		$("#total_points").text(""+total);
-		$('#sha1').empty()
 		$('#sha1').text(""+ag_run["checksum"])
+		$("#time").text(ag_run["timestamp"]);
 
-		$("#timestamp").empty();
-		$("#timestamp").text(ag_run["timestamp"]);
+		const revision = $('#revision');
+		revision.empty();
+		const link = $('<a class="fancy-link"></a>');
+		link.attr('href', './?p='+ag_run["revision"]);
+		link.text(ag_run["revision"]);
+		revision.append(link);
 
 	}
 
@@ -116,9 +118,20 @@ $(document).ready(function (){
 		}
 	}
 
-	$.get( "./results.json", function(data) {
+	/* Use ?v=... so that the browser cache gets busted
+	meaning that results.json is a forced update everytime
+	this will reduce issues where people see cached reports */
+
+	$.get( "./results.json?v="+(new Date()).getTime(), function(data) {
 		add_nav_stamps(data);
-		update_page(data[0]);
+		const latest = data.reduce(function(acc, cur) {
+			if (acc["revision"] < cur["revision"]) {
+				return cur;
+			} else {
+				return acc;
+			}
+		});
+		update_page(latest);
 	})
 	.fail(function() {
 		$('#error').removeClass('hidden');

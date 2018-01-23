@@ -290,26 +290,15 @@ img:not(.emoji) {
 }
 
 .fancy-link {
-    text-decoration: none !important;
-    color: #337ab7;
+    text-decoration: underline;
+    color: #0456e0;
     display: inline-block;
     position: relative;
     padding-bottom: 0px;
 }
 
-.fancy-link:after {
-    content: '';
-    display: block;
-    margin: auto;
-    height: 1px;
-    width: 0px;
-    background: transparent;
-    transition: width .3s ease, background-color .3s ease;
-}
-
-.fancy-link:hover:after {
-    width: 100%;
-    background: #337ab7;
+.fancy-link:hover {
+    color: #3070db;
 }
 
 .container-fluid {
@@ -487,14 +476,6 @@ h3 {
     border-radius:3px;
 }
 
-.hidden {
-
-}
-
-.show {
-    visibility: 
-}
-
 .test-fail {
     color: red;
 }
@@ -516,4 +497,8 @@ h3 {
 
 .navbar-link {
     cursor: pointer;
+}
+
+body {
+    padding-top: 0px;
 }
