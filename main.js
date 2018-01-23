@@ -17,9 +17,9 @@ $(document).ready(function (){
 	    ... */
 	    const test_class = $('#tests');
 	    test_class.empty();
-	    test_class.append("<div class='row'><div class='col-sm-6'> \
+	    test_class.append("<div class='row'><div class='col-sm-6 col-xs-6'> \
 	    	<h4 class='test-table-title'>Name</h4></div>\
-	    	<div class='col-sm-6'><h4 class='test-table-title'>Score</h4></div></div>");
+	    	<div class='col-sm-6 col-xs-6'><h4 class='test-table-title'>Score</h4></div></div>");
 	    for (var i = 0; i < tests.length; ++i) {
 	    	const test = tests[i];
 	    	var cls = "test-fail";
@@ -29,12 +29,12 @@ $(document).ready(function (){
 	    	const score = "(" + test["ptsPossible"] + "/" + test["ptsEarned"] + ")"
 	    	var h4 = $('<h4></h4>');
 	    	h4.html(test["name"]);
-	    	const test_name = $("<div class='col-sm-6'></div>");
+	    	const test_name = $("<div class='col-sm-6 col-xs-6'></div>");
 	    	test_name.append(h4);
 
 	    	h4 = $('<h4></h4>');
 	    	h4.html(score);
-	    	const score_div = $("<div class='col-sm-6'></div>");
+	    	const score_div = $("<div class='col-sm-6 col-xs-6'></div>");
 	    	score_div.addClass(cls);
 	    	score_div.append(h4);
 

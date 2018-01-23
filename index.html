@@ -681,10 +681,10 @@ body {
       <div class="title"><h2 class="title-text"> Test Cases </h2> </div>
       <div class="container-fluid"><div class="row"><div class="content col-sm-11 .col-sm-offset-1">
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-4 col-xs-12">
             <h3 style="text-align:left">Revision: <span id="revision"></span></h3>
           </div>
-          <div class="col-sm-8">
+          <div class="col-sm-8 col-xs-12">
           <h3 style="text-align:right">Timestamp: <span id="time"></span> </h3>
         </div>
       </div>
@@ -721,9 +721,9 @@ $(document).ready(function (){
 	    ... */
 	    const test_class = $('#tests');
 	    test_class.empty();
-	    test_class.append("<div class='row'><div class='col-sm-6'> \
+	    test_class.append("<div class='row'><div class='col-sm-6 col-xs-6'> \
 	    	<h4 class='test-table-title'>Name</h4></div>\
-	    	<div class='col-sm-6'><h4 class='test-table-title'>Score</h4></div></div>");
+	    	<div class='col-sm-6 col-xs-6'><h4 class='test-table-title'>Score</h4></div></div>");
 	    for (var i = 0; i < tests.length; ++i) {
 	    	const test = tests[i];
 	    	var cls = "test-fail";
@@ -733,12 +733,12 @@ $(document).ready(function (){
 	    	const score = "(" + test["ptsPossible"] + "/" + test["ptsEarned"] + ")"
 	    	var h4 = $('<h4></h4>');
 	    	h4.html(test["name"]);
-	    	const test_name = $("<div class='col-sm-6'></div>");
+	    	const test_name = $("<div class='col-sm-6 col-xs-6'></div>");
 	    	test_name.append(h4);
 
 	    	h4 = $('<h4></h4>');
 	    	h4.html(score);
-	    	const score_div = $("<div class='col-sm-6'></div>");
+	    	const score_div = $("<div class='col-sm-6 col-xs-6'></div>");
 	    	score_div.addClass(cls);
 	    	score_div.append(h4);
 
