@@ -17,24 +17,24 @@ $(document).ready(function (){
 	    ... */
 	    const test_class = $('#tests');
 	    test_class.empty();
-	    test_class.append("<div class='row'><div class='col-sm-6 col-xs-6'> \
+	    test_class.append("<div class='row'><div class='col-sm-6 col-xs-8'> \
 	    	<h4 class='test-table-title'>Name</h4></div>\
-	    	<div class='col-sm-6 col-xs-6'><h4 class='test-table-title'>Score</h4></div></div>");
+	    	<div class='col-sm-6 col-xs-4' style='text-align:right;'><h4 class='test-table-title'>Score</h4></div></div>");
 	    for (var i = 0; i < tests.length; ++i) {
 	    	const test = tests[i];
 	    	var cls = "test-fail";
-	    	if (test["ptsPossible"] === test["ptsEarned"]) {
+	    	if (test["ptsPossible"] >= test["ptsEarned"]) {
 	    		cls = "test-success";
 	    	}
 	    	const score = "(" + test["ptsPossible"] + "/" + test["ptsEarned"] + ")"
 	    	var h4 = $('<h4></h4>');
 	    	h4.html(test["name"]);
-	    	const test_name = $("<div class='col-sm-6 col-xs-6'></div>");
+	    	const test_name = $("<div class='col-sm-6 col-xs-8'></div>");
 	    	test_name.append(h4);
 
 	    	h4 = $('<h4></h4>');
 	    	h4.html(score);
-	    	const score_div = $("<div class='col-sm-6 col-xs-6'></div>");
+	    	const score_div = $("<div class='col-sm-6 col-xs-4'></div>");
 	    	score_div.addClass(cls);
 	    	score_div.append(h4);
 
@@ -48,7 +48,7 @@ $(document).ready(function (){
 	    	drawer.addClass('hidden');
 
 	    	const description = $('<h4></h4>');
-	    	description.text('Description '+test['description']);
+	    	description.html('Description:<p>'+test['description'] + "</p>");
 
 	    	const output = $('<div class="highlighter-rouge"><div class="highlight">\
 	    		<pre class="highlight" style="white-space:pre-wrap; overflow-y: scroll; overflow-x:hidden; height: 300px;">\
@@ -90,7 +90,13 @@ $(document).ready(function (){
 
 		$("#total_score").text(""+scored);
 		$("#total_points").text(""+total);
-		$('#sha1').text(""+ag_run["checksum"])
+		const files = ag_run["checksum"].split("\n");
+		const new_hashes = files.map(function (e){
+			const split = e.split(" ");
+			split[0] = split[0].slice(0, 7);
+			return split.join(" ");
+		}).join("\n");
+		$('#sha1').text(""+new_hashes);
 		$("#time").text(ag_run["timestamp"]);
 
 		const revision = $('#revision');
@@ -123,18 +129,31 @@ $(document).ready(function (){
 	this will reduce issues where people see cached reports */
 
 	$.get( "./results.json?v="+(new Date()).getTime(), function(data) {
-		add_nav_stamps(data);
-		const latest = data.reduce(function(acc, cur) {
-			if (acc["revision"] < cur["revision"]) {
-				return cur;
-			} else {
-				return acc;
+		data.sort(function(a, b){
+			const a_date = new Date(a['timestamp'].replace(" ", "T"));
+			const b_date = new Date(b['timestamp'].replace(" ", "T"));
+			const a_time = a_date.getTime();
+			const b_time = b_date.getTime();
+			if (a_time < b_time) {
+				return -1;
+			} else if (a_time > b_time) {
+				return 1;
 			}
+			return 0;
 		});
+		add_nav_stamps(data);
+		const latest = data[data.length-1];
 		update_page(latest);
 	})
-	.fail(function() {
-		$('#error').removeClass('hidden');
+	.fail(function(err) {
+		const status = err.status;
+		if (status >= 400 && status <= 499) {
+			$('#client_error').removeClass('hidden');
+		} else if (status >= 500) {
+			$('#server_error').removeClass('hidden');
+		} else {
+			$('#offline').removeClass('hidden');
+		}
 		$('#main').addClass('hidden');
 	});
 

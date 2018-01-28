@@ -1,6 +1,6 @@
 [ 
     {
-    "timestamp":"2017-04-14 NN:NN:NN.NNNNNNN",
+    "timestamp":"2017-04-14 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -42,7 +42,7 @@
       }
     ]
   }, {
-    "timestamp":"now",
+    "timestamp":"2017-04-15 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -84,7 +84,7 @@
       }
     ]
   }, {
-    "timestamp":"now",
+    "timestamp":"2017-04-17 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -126,7 +126,7 @@
       }
     ]
   }, {
-    "timestamp":"now",
+    "timestamp":"2017-04-13 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -168,7 +168,7 @@
       }
     ]
   }, {
-    "timestamp":"now",
+    "timestamp":"2017-04-12 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -210,7 +210,7 @@
       }
     ]
   }, {
-    "timestamp":"now",
+    "timestamp":"2017-04-19 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -253,7 +253,7 @@
     ]
   }, 
                 {
-    "timestamp":"now",
+    "timestamp":"2017-04-22 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -296,7 +296,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-17 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -339,7 +339,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-31 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -382,7 +382,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-28 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -425,7 +425,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-23 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -468,7 +468,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-24 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -511,7 +511,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-18 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -554,7 +554,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-11 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -597,7 +597,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-09 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -640,7 +640,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-01 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -683,7 +683,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-02 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -726,7 +726,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-25 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -769,7 +769,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-21 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -812,7 +812,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-29 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -855,7 +855,7 @@
     ]
   },
   {
-    "timestamp":"now",
+    "timestamp":"2017-04-26 00:11:00.123456",
     "revision": 39147109,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c",
     "testcases": [
@@ -898,7 +898,7 @@
     ]
   },
   {
-    "timestamp":"past",
+    "timestamp":"2017-04-02 00:11:00.123456",
     "revision": 39147108,
     "checksum": "77fdc5590606e8e407e770b22a0040ee81862529  cracker1.c\n77fdc5590606e8e407e770b22a0040ee81862529  cracker2.c",
     "testcases": [

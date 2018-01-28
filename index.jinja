@@ -35,7 +35,7 @@
     </div>
     </nav>
 
-    <div id="error" class="hidden">
+    <div id="offline" class="hidden">
       <div class="col-md-2 col-sm-1 col-xs-0"></div>
     <div class="col-md-8 col-sm-10 col-xs-12">
     <div id="content">
@@ -53,6 +53,43 @@
   </div>
 </div>
 
+  <div id="client_error" class="hidden">
+      <div class="col-md-2 col-sm-1 col-xs-0"></div>
+    <div class="col-md-8 col-sm-10 col-xs-12">
+    <div id="content">
+      <div class="wrapper">
+      <div class="pad"><div class="card">
+      <div class="title"><h2 class="title-text">Sorry!</h2></div>
+    </div>
+
+    <div class="container-fluid"><div class="row"><div class="content col-sm-11 .col-sm-offset-1">
+        <p>We have not pushed the grades to your repository yet. Please make a piazza post if one has not already been made. We are working to fix this.</p>
+      </div></div></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div id="server_error" class="hidden">
+      <div class="col-md-2 col-sm-1 col-xs-0"></div>
+    <div class="col-md-8 col-sm-10 col-xs-12">
+    <div id="content">
+      <div class="wrapper">
+      <div class="pad"><div class="card">
+      <div class="title"><h2 class="title-text">Server Error!</h2></div>
+    </div>
+
+    <div class="container-fluid"><div class="row"><div class="content col-sm-11 .col-sm-offset-1">
+        <p>Something is <i>really</i> messed up. We will contact engineering it to fix this.</p>
+      </div></div></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
 
     <div id="main">
     <div class="col-md-2 col-sm-1 col-xs-0"></div>
@@ -60,7 +97,7 @@
     <div id="contain">
       <div class="wrapper">
       <div class="pad"><div class="card">
-      <div class="title"><h2 class="title-text">Score [<span id="total_score">0</span>/<span id="total_points">0</span>]</h2></div>
+      <div class="title"><h2 class="title-text">Score: [<span id="total_score">0</span>/<span id="total_points">0</span>]</h2></div>
 
       <div class="container-fluid"><div class="row"><div class="content col-sm-11 .col-sm-offset-1">
         <p>Timestamp: [<span id="timestamp"></span>]</p>
