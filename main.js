@@ -23,10 +23,10 @@ $(document).ready(function (){
 	    for (var i = 0; i < tests.length; ++i) {
 	    	const test = tests[i];
 	    	var cls = "test-fail";
-	    	if (test["ptsPossible"] >= test["ptsEarned"]) {
+	    	if (test["ptsEarned"] >= test["ptsPossible"]) {
 	    		cls = "test-success";
 	    	}
-	    	const score = "(" + test["ptsPossible"] + "/" + test["ptsEarned"] + ")"
+	    	const score = "(" + test["ptsEarned"] + "/" + test["ptsPossible"] + ")"
 	    	var h4 = $('<h4></h4>');
 	    	h4.html(test["name"]);
 	    	const test_name = $("<div class='col-sm-6 col-xs-8'></div>");
@@ -84,8 +84,8 @@ $(document).ready(function (){
 		var total = 0;
 		for(var i = 0; i < ag_run["testcases"].length; ++i) {
 			const test = ag_run["testcases"][i];
-			scored += test["ptsPossible"];
-			total += test["ptsEarned"];
+			scored += test["ptsEarned"];
+			total += test["ptsPossible"];
 		}
 
 		$("#total_score").text(""+scored);
@@ -129,6 +129,7 @@ $(document).ready(function (){
 	this will reduce issues where people see cached reports */
 
 	$.get( "./results.json?v="+(new Date()).getTime(), function(data) {
+		data = JSON.parse(data);
 		data.sort(function(a, b){
 			const a_date = new Date(a['timestamp'].replace(" ", "T"));
 			const b_date = new Date(b['timestamp'].replace(" ", "T"));
